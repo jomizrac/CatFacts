@@ -2,6 +2,7 @@
 Exercise for BW DX internship
 
 This program sends a random cat fact to a list of numbers given in a JSON file, waiting 3 seconds between messages
+Example JSON files for numbers and cat facts have been included in this Git Repo
 
 To run:
 
