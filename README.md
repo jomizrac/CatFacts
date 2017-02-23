@@ -9,7 +9,7 @@ To run:
 
 2. Ensure your Catapult credentials are placed in the /home/\<user>/ directory in a file named ".bndsdkrc"
 
-3. If wanted, place a JSON file created on http://catfacts-api.appspot.com/ into the current directory.  Use the following URL to get the list: http://catfacts-api.appspot.com/api/facts?=\<NUMBER> and replace \<NUMBER> with the desired number of cat facts to choose from, up to 100.
+3. If wanted, place a JSON file created on http://catfacts-api.appspot.com/ into the current directory.  Use the following URL to get the list: "http://catfacts-api.appspot.com/api/facts?=5" and replace 5 with the desired number of cat facts to choose from, up to 100.
 
 4. On the command line, run the following: python catfacts.py \<filename>
 
