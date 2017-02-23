@@ -15,13 +15,13 @@ from bandwidth_sdk import models
 def sendMessage(number):
 		global cFacts
 		currentMessage = Message.send(
-    			sender='+14242747426', 		#my number
-    			receiver=number,		#the number being sent to
-    			text=random.choice(cFacts),	#a randomly selected fact from the list
-    			tag='cat fact',			#a tag to describe the message
-			receipt_requested='all')	#request a delivery receipt
+    			sender='+14242747426', 									#my number
+    			receiver=number,									#the number being sent to
+    			text=random.choice(cFacts),								#a randomly selected fact from the list
+    			tag='cat fact',										#a tag to describe the message
+			receipt_requested='all')								#request a delivery receipt
 		
-		#time.sleep(3)				#this and the following line are for testing
+		#time.sleep(3)											#this and the following line are for testing
 		#print Message.get(currentMessage.id)
 
 
@@ -32,15 +32,27 @@ if (len(sys.argv) == 1):											#if no input filename, use the default list o
 		"Many cats cannot properly digest cow's milk. Milk and milk products give them diarrhea.",
 		"A cat has approximately 60 to 80 million olfactory cells.",
 		"Cat's urine glows under a black light."]							#default cat fact list
+
 elif (len(sys.argv)== 2):											#if there is a json file specified for cats facts
-	with open(sys.argv[1]) as data_file:
-		data = json.load(data_file)
-	cFacts = data["facts"]											#set cFacts list to be the facts from that file
+	try:
+		with open(sys.argv[1]) as data_file:
+			data = json.load(data_file)
+		cFacts = data["facts"]										#set cFacts list to be the facts from that file
+	except ValueError:											#If there is a problem with the JSON file, exit
+		print "Cat Fact JSON file is formatted incorrectly"
+		exit()
+
 else:														#incorrect usage, see README
 	print "incorrect usage, see README"
 	exit();
-with open("numbers.json") as number_file:									#open the list of numbers
-	numList = json.load(number_file)
+
+try:
+	with open("numbers.json") as number_file:								#open the list of numbers
+		numList = json.load(number_file)
+except ValueError:												#if there is a problem with the JSON file, exit
+	print "Numbers JSON file is formatted incorrectly"
+	exit()
+
 for number in numList:												#go through the list of numbers
 	sendMessage(number)											#calls method to send a fact to that number
 	time.sleep(3)												#wait for 3 seconds to send the next
